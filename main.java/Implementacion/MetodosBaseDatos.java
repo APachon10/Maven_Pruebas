@@ -1,4 +1,4 @@
-package Idao;
+package Implementacion;
 
 public interface MetodosBaseDatos {
 	public void añadirUsuario();
