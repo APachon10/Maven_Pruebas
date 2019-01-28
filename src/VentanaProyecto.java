@@ -2,9 +2,7 @@
 
 import java.awt.EventQueue;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -18,12 +16,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.html.parser.Entity;
 
 import main.modelos.Proyectos;
 
 public class VentanaProyecto extends JFrame {
-
-	private JPanel contentPane;
+	private EntityManagerFactory factory = Persistence.createEntityManagerFactory("scrumprojectmanager");
+    private EntityManager entityManager = factory.createEntityManager();
+	
+    private JPanel contentPane;
 	private JTextField NameProject;
 	private JInternalFrame internalFrame ;
 	private JDesktopPane desktopPane;
@@ -152,10 +153,7 @@ public class VentanaProyecto extends JFrame {
 		internalFrame.setVisible(true);
 		contentPane.setLayout(gl_contentPane);
 	}
-	public void añadirProjecto() {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("scrumprojectmanager");
-        EntityManager entityManager = factory.createEntityManager();
-         
+	public void añadirProjecto(EntityManagerFactory factory,EntityManager entityManager) {    
         entityManager.getTransaction().begin();
 		Proyectos p = new Proyectos();
 		if (p.getProject_name().equals(NameProject.getText())) {
